@@ -1,3 +1,98 @@
+let interactiveScreen = document.getElementById('interactive-text');
+let containerCoffee = document.querySelector('.coffee-sel');
+
+//Botones
+let buyButton = document.getElementById('buy-btn');
+let cancelButton = document.getElementById('cancel-btn');
+let continueButton = document.getElementById('continue-btn');
+let payButton = document.getElementById('pay-btn');
+
+let moccaButton = document.getElementById('mocca-btn');
+let latteButton = document.getElementById('latte-btn');
+let cappuccinoButton = document.getElementById('cappucinno-btn');
+
+let userCoffee;
+
+let coffeeMachine = {
+    //Estado de la maquina de cafe(true = encendida / false = apagada)
+    status: false,
+    
+    inventory: {
+        water: 1000,
+        coffee: 500,
+        milk: 500,
+        chocolate: 200,
+        money: 0
+    },
+
+    coffeTypes: {
+        
+    },
+    //Metodos
+    coffeeFactory (name, water, coffee, milk, chocolate, cost) {
+        return {
+            name: name,
+            water: water,
+            coffee: coffee,
+            milk: milk,
+            cost: cost
+        }
+    },
+    showMenu(){
+        interactiveScreen.textContent = 'Seleccione el cafe que desea en el menu de la izquierda..';
+        containerCoffee.classList.add('visible');
+        buyButton.classList.add('invisible');
+    },
+    reset(){
+        interactiveScreen.textContent = 'Bienvenido a la Coffee O-Matic 3000';
+        containerCoffee.classList.remove('visible');
+        buyButton.classList.remove('invisible');
+        userCoffe = '';
+    },
+    updateScreen(userCoffee){
+        interactiveScreen.textContent = `Es cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar.`;
+    },
+    selectCoffee(selection){
+        switch (selection) {
+            case 'mocca':
+                userCoffee = this.coffeTypes.moka;
+                console.log(userCoffee);
+                this.updateScreen(userCoffee);
+                break;
+            case 'latte':
+                userCoffee = this.coffeTypes.latte;
+                console.log(userCoffee);
+                this.updateScreen(userCoffee);
+                break;
+            case 'cappuccino':
+                userCoffee = this.coffeTypes.cappuccino;
+                console.log(userCoffee);
+                this.updateScreen(userCoffee);
+                break;
+        }
+    }
+}
+
+//Creamos los Cafes
+coffeeMachine.coffeTypes.moka = coffeeMachine.coffeeFactory('Moka', 100, 50, 100, 0, 2);
+coffeeMachine.coffeTypes.cappuccino = coffeeMachine.coffeeFactory('Cappuccino', 100, 50, 100, 0, 2);
+coffeeMachine.coffeTypes.latte = coffeeMachine.coffeeFactory('Latte', 100, 50, 100, 0, 2);
+
+
+/*const coffeeFactory = (name, water, coffee, milk, chocolate, cost) => {
+    return {
+        name: name,
+        water: water,
+        coffee: coffee,
+        milk: milk,
+        cost: cost
+    }
+}
+*/
+
+//const moka = coffeeMachine.coffeeFactory('Moka', 100, 50, 100, 0, 2);
+//const moka = coffeeFactory('Moka', 100, 50, 100, 0, 2);
+
 /*
 Tipos de Cafe
 a: Latte
@@ -5,6 +100,7 @@ b: Moka
 c: Cappucino
 */
 let coffeeTypes = [[100, 50, 100, 0, 1, 'Latte'], [100, 50, 100, 0, 2, 'Moka'], [100, 50, 100, 50, 2, 'Cappucino']];
+
 
 /*
 Inventario
@@ -17,7 +113,29 @@ Inventario
 */
 let inventory = [1000, 500, 500, 0, 0];
 
-let switchMaquina = true;
+
+
+let switchMaquina = false;
+
+let selectMocca = () => {
+    coffeeMachine.selectCoffee('mocca');
+}
+
+let selectLatte = () => {
+    coffeeMachine.selectCoffee('latte');
+}
+
+let selectCappuccino = () => {
+    coffeeMachine.selectCoffee('cappuccino');
+}
+
+
+buyButton.addEventListener('click', coffeeMachine.showMenu);
+cancelButton.addEventListener('click', coffeeMachine.reset);
+moccaButton.addEventListener('click', selectMocca);
+latteButton.addEventListener('click', selectLatte);
+cappuccinoButton.addEventListener('click', selectCappuccino);
+//continueButton.
 
 const buyCoffee = () => {
     let userOption = prompt('Desea comprar un cafe? 1) Si - 2) No');
@@ -132,5 +250,5 @@ const printReport = () => {
 }
 
 while (switchMaquina === true) {
-    buyCoffee();
+    //buyCoffee();
 }
