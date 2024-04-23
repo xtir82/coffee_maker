@@ -28,7 +28,7 @@
         <h1>Coffee O-Matic 3000</h1>
       </div>
 
-      <div class="coffee-sel">
+      <div class="coffee-sel invisible">
         <div class="container-coffee">
           <div class="card coffee-card">
             <img src="img/mocca.png" class="card-img-top coffe-img" alt="...">
@@ -62,11 +62,11 @@
           <p id="interactive-text">Bienvenido a la Coffee O-Matic 3000</p>
         </div>
         <div>
-          <input></input>
+          <input id="payment" class="invisible" type="text" placeholder="Introduzca el pago aqui"></input>
           <a id="buy-btn" class="btn btn-success buy-button">Comprar</a>
           <a id="cancel-btn" class="btn btn-danger buy-button">Cancelar</a>
-          <a id="continue-btn" class="btn btn-primary buy-button">Continuar</a>
-          <a id="pay-btn" class="btn btn-primary buy-button">Pagar</a>
+          <a id="continue-btn" class="btn btn-primary buy-button invisible">Continuar</a>
+          <a id="pay-btn" class="btn btn-primary buy-button invisible">Pagar</a>
         </div>
       </div>
 
