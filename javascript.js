@@ -69,12 +69,12 @@ let coffeeMachine = {
                 this.updateText(`Ya la entregaremos su cafe...`);
                 payButton.classList.add('invisible');
                 buyButton.classList.remove('invisible');
-                interactiveScreen.classList.add('invisible');
+                paymentInput.classList.add('invisible');
             } else if (payment > 0) {
                 this.updateText(`Su cambio es de ${payment}. Ya la entregaremos su cafe...`);
                 payButton.classList.add('invisible');
                 buyButton.classList.remove('invisible');
-                interactiveScreen.classList.add('invisible');
+                paymentInput.classList.add('invisible');
             }
             this.prepareCoffee();
         
