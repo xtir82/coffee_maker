@@ -13,7 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -35,23 +36,23 @@
             <div class="card-body">
               <h5 class="card-title">Mocca</h5>
               <p class="card-text">La combinación perfecta entre la amargura e intensidad del café y la dulzura del cacao.</p>
-              <a id="mocca-btn" class="btn btn-primary buy-button">Seleccionar</a>
+              <a id="mocca-btn" class="btn btn-primary buy-button coffee-btn ">Seleccionar</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card coffee-card">
             <img src="img/latte.png" class="card-img-top coffe-img" alt="...">
             <div class="card-body coffee-card">
               <h5 class="card-title">Latte</h5>
               <p class="card-text">El clásico y delicioso café con leche.</p>
-              <a id="latte-btn" class="btn btn-primary">Seleccionar</a>
+              <a id="latte-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
             </div>
           </div>
-          <div class="card">
+          <div class="card coffee-card">
             <img src="img/cappuccino.png" class="card-img-top coffe-img" alt="...">
-            <div class="card-body coffee-card">
+            <div class="card-body">
               <h5 class="card-title">Cappuccino</h5>
               <p class="card-text">Déjate seducir por su generosa y sedosa capa de leche entera combinada con un espresso intenso elaborado con granos de café arábica premium.</p>
-              <a id="cappucinno-btn" class="btn btn-primary">Seleccionar</a>
+              <a id="cappucinno-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
             </div>
           </div>
         </div>
@@ -63,6 +64,8 @@
         </div>
         <div>
           <input id="payment" class="invisible" type="text" placeholder="Introduzca el pago aqui"></input>
+        </div>
+        <div>
           <a id="buy-btn" class="btn btn-success buy-button">Comprar</a>
           <a id="cancel-btn" class="btn btn-danger buy-button">Cancelar</a>
           <a id="continue-btn" class="btn btn-primary buy-button invisible">Continuar</a>
@@ -74,6 +77,9 @@
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
           <label class="form-check-label" for="flexSwitchCheckDefault">OFF / ON</label>
+        </div>
+        <div>
+          <a id="reset-btn" class="btn btn-warning">Reset</a>
         </div>
       </div>
 

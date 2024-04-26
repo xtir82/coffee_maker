@@ -6,6 +6,7 @@ let buyButton = document.getElementById('buy-btn');
 let cancelButton = document.getElementById('cancel-btn');
 let continueButton = document.getElementById('continue-btn');
 let payButton = document.getElementById('pay-btn');
+let resetButton = document.getElementById('reset-btn');
 
 let moccaButton = document.getElementById('mocca-btn');
 let latteButton = document.getElementById('latte-btn');
@@ -50,10 +51,10 @@ let coffeeMachine = {
         interactiveScreen.textContent = 'Bienvenido a la Coffee O-Matic 3000';
         containerCoffee.classList.add('invisible');
         buyButton.classList.remove('invisible');
+        payButton.classList.add('invisible');
+        continueButton.classList.add('invisible');
+        paymentInput.classList.add('invisible');
         userCoffee = '';
-    },
-    updateScreen(userCoffee){
-        interactiveScreen.textContent = `Es cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`;
     },
     updateText(text){
         interactiveScreen.textContent = text;
@@ -64,9 +65,16 @@ let coffeeMachine = {
             this.inventory.money += userCoffee.cost; 
 
             console.log('holis');
-            
-            if (payment > 0) {
+            if (payment === 0) {
+                this.updateText(`Ya la entregaremos su cafe...`);
+                payButton.classList.add('invisible');
+                buyButton.classList.remove('invisible');
+                interactiveScreen.classList.add('invisible');
+            } else if (payment > 0) {
                 this.updateText(`Su cambio es de ${payment}. Ya la entregaremos su cafe...`);
+                payButton.classList.add('invisible');
+                buyButton.classList.remove('invisible');
+                interactiveScreen.classList.add('invisible');
             }
             this.prepareCoffee();
         
@@ -80,17 +88,17 @@ let coffeeMachine = {
             case 'mocca':
                 userCoffee = this.coffeTypes.moka;
                 console.log(userCoffee);
-                this.updateScreen(userCoffee);
+                this.updateText(`El cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`);
                 break;
             case 'latte':
                 userCoffee = this.coffeTypes.latte;
                 console.log(userCoffee);
-                this.updateScreen(userCoffee);
+                this.updateText(`El cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`);
                 break;
             case 'cappuccino':
                 userCoffee = this.coffeTypes.cappuccino;
                 console.log(userCoffee);
-                this.updateScreen(userCoffee);
+                this.updateText(`El cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`);
                 break;
         }
     },
@@ -123,6 +131,7 @@ let coffeeMachine = {
         this.inventory.chocolate -= userCoffee.chocolate;
         this.inventory.coffee -= userCoffee.coffee;
         console.log(this.inventory);
+        updateLocalInv();
     }
 }
 
@@ -132,40 +141,49 @@ coffeeMachine.coffeTypes.cappuccino = coffeeMachine.coffeeFactory('Cappuccino', 
 coffeeMachine.coffeTypes.latte = coffeeMachine.coffeeFactory('Latte', 100, 50, 100, 0, 2);
 
 
-let switchMaquina = false;
 
-let selectMocca = () => {
-    coffeeMachine.selectCoffee('mocca');
-}
-
-let selectLatte = () => {
-    coffeeMachine.selectCoffee('latte');
-}
-
-let selectCappuccino = () => {
-    coffeeMachine.selectCoffee('cappuccino');
-}
-
-let actPayment = () => {
-    coffeeMachine.paymentCheck(paymentInput.value);
-}
-
-let actCheck = () => {
-    coffeeMachine.checkInventory(userCoffee);
-}
-
-//EventListeners de los botones
+//EventListeners de los botones (Se usan funciones anonimas para pasar los parametros a la funcion en el EventListener)
 buyButton.addEventListener('click', coffeeMachine.showMenu);
 cancelButton.addEventListener('click', coffeeMachine.reset);
-payButton.addEventListener('click', actPayment);
-continueButton.addEventListener('click', actCheck);
+payButton.addEventListener('click', () => {coffeeMachine.paymentCheck(paymentInput.value);});
+continueButton.addEventListener('click', () => {coffeeMachine.checkInventory(userCoffee);});
 
-moccaButton.addEventListener('click', selectMocca);
-latteButton.addEventListener('click', selectLatte);
-cappuccinoButton.addEventListener('click', selectCappuccino);
+moccaButton.addEventListener('click', () => {coffeeMachine.selectCoffee('mocca');});
+latteButton.addEventListener('click', () => {coffeeMachine.selectCoffee('latte');});
+cappuccinoButton.addEventListener('click', () => {coffeeMachine.selectCoffee('cappuccino');});
 
+//Implementacion del LocalStorage
+const checkLocalInv = () => {
+    if (localStorage.getItem('coffeeInventory') === null) {
+        localStorage.setItem('coffeeInventory', JSON.stringify(coffeeMachine.inventory)); //El JSON.stringify convierte el objeto en un String
+    } else {
+        coffeeMachine.inventory = JSON.parse(localStorage.getItem('coffeeInventory'));  //El JSON.parse convierte el string en un objeto
+    }
+}
 
+const updateLocalInv = () => {
+    localStorage.setItem('coffeeInventory', JSON.stringify(coffeeMachine.inventory));
+}
 
+checkLocalInv();
+
+//Boton de reset para reiniciar el LocalStorage y el inventario a su estado Original
+
+resetButton.addEventListener('click', () => {
+    coffeeMachine.inventory = {
+        water: 1000,
+        coffee: 500,
+        milk: 500,
+        chocolate: 100,
+        money: 0
+    }
+    updateLocalInv()
+    coffeeMachine.reset()
+});
+
+//De aqui pa abajo nada sirve aun :(
+    
+let switchMaquina = false;
 
 const rechargeMachine = () => {
     let cash = inventory[4]
