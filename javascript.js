@@ -109,15 +109,19 @@ let coffeeMachine = {
 
         if (userCoffee.water > this.inventory.water) {
             this.updateText('No hay suficiente agua para preparar su cafe. Seleccione otro cafe');
+            payButton.classList.add('invisible');
     
         } else if (userCoffee.coffee > this.inventory.coffee) {
             this.updateText('No hay suficiente Cafe para preparar su cafe. Seleccione otro cafe');
+            payButton.classList.add('invisible');
         
         } else if (userCoffee.milk > this.inventory.milk) {
             this.updateText('No hay suficiente Leche para preparar su cafe. Seleccione otro cafe');
+            payButton.classList.add('invisible');
         
         } else  if (userCoffee.chocolate > this.inventory.chocolate) {
             this.updateText('No hay suficiente Chocolate para preparar su cafe. Seleccione otro cafe');
+            payButton.classList.add('invisible');
         
         } else {
             this.updateText('Prepararemos pronto su Cafe! Introduzca el pago para continuar');
