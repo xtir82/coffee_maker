@@ -21,6 +21,8 @@
 
     <!-- JS -->
     <script src="javascript.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> <!-- SweetAlerts -->
+    
   </head>
 
   <body>
@@ -63,7 +65,9 @@
           <p id="interactive-text">Bienvenido a la Coffee O-Matic 3000</p>
         </div>
         <div>
-          <input id="payment" class="invisible" type="text" placeholder="Introduzca el pago aqui"></input>
+          <form>
+          <input id="payment" min="1" max="20" class="invisible" type="text" placeholder="Introduzca el pago aqui"></input>
+          </form>
         </div>
         <div>
           <a id="buy-btn" class="btn btn-success buy-button">Comprar</a>

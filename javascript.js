@@ -30,6 +30,14 @@ let coffeeMachine = {
     },
 
     coffeTypes: {},
+    coffeTypesArray: [{
+        name: 'prueba',
+        water: 'prueba',
+        coffee: 'prueba',
+        milk: 'prueba',
+        chocolate:'prueba',
+        cost: 'prueba'
+    }],
 
     //Metodos
     coffeeFactory (name, water, coffee, milk, chocolate, cost) {
@@ -54,6 +62,7 @@ let coffeeMachine = {
         payButton.classList.add('invisible');
         continueButton.classList.add('invisible');
         paymentInput.classList.add('invisible');
+        paymentInput.value = '';
         userCoffee = '';
     },
     updateText(text){
@@ -136,6 +145,16 @@ let coffeeMachine = {
         this.inventory.coffee -= userCoffee.coffee;
         console.log(this.inventory);
         updateLocalInv();
+        Swal.fire({
+            title: "Disfruta tu cafe!!",
+            text: "Ya esta Listo!",
+            icon: "success",
+            confirmButtonText: `<i class="fa fa-thumbs-up"></i> Gracias!`
+          }).then((result) => {
+            if (result.isConfirmed) {
+                coffeeMachine.reset();
+            }
+          });
     }
 }
 
@@ -184,6 +203,36 @@ resetButton.addEventListener('click', () => {
     updateLocalInv()
     coffeeMachine.reset()
 });
+
+//Testing Area
+/*
+const showCoffee = (coffee) => {
+    containerCoffee.innerHTML += '
+    <div class="card coffee-card">
+        <img src="img/{coffee.name}.png" class="card-img-top coffe-img" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{coffee.name}</h5>
+            <p class="card-text">{coffee.description}</p>
+            <a id="{coffee.name + '-btn'}" class="btn btn-primary buy-button coffee-btn ">Seleccionar</a>
+        </div>
+    </div>
+    ' 
+}
+
+coffeeMachine.coffeTypes.forEach(showCoffee);
+
+
+    coffeeFactory (name, water, coffee, milk, chocolate, cost, description) {
+        return {
+            name: name,
+            water: water,
+            coffee: coffee,
+            milk: milk,
+            chocolate:chocolate,
+            cost: cost,
+            description: description
+        }
+*/
 
 //De aqui pa abajo nada sirve aun :(
     

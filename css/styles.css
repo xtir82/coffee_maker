@@ -63,9 +63,9 @@ h1 {
   text-align: center;
 }
 
-.coffe-img {
+/*.coffe-img {
 
-}
+}*/
 
 .card-body {
   display: flex;
@@ -96,4 +96,8 @@ h1 {
 
 .invisible {
   visibility: hidden;
+}
+
+.card-title {
+  text-transform: capitalize;
 }
