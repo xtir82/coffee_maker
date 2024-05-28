@@ -162,7 +162,6 @@ const updateLocalInv = () => {
 checkLocalInv();
 
 //Boton de reset para reiniciar el LocalStorage y el inventario a su estado Original
-
 resetButton.addEventListener('click', () => {
     coffeeMachine.inventory = {
         water: 1000,
@@ -176,7 +175,6 @@ resetButton.addEventListener('click', () => {
 });
 
 //Testing Area
-
 const showCoffee = (coffee) => {
     containerCoffee.innerHTML += `
     <div class="card coffee-card">
