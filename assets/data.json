@@ -1,0 +1,27 @@
+[{
+    "name": "mocca",
+    "water": 100,
+    "coffee": 50,
+    "milk": 100,
+    "chocolate": 0,
+    "cost": 2,
+    "description": "La combinación perfecta entre la amargura e intensidad del café y la dulzura del cacao."
+},{
+    "name": "cappuccino",
+    "water": 100,
+    "coffee": 50,
+    "milk": 100,
+    "chocolate": 100,
+    "cost": 3,
+    "description": "Déjate seducir por su generosa y sedosa capa de leche entera combinada con un espresso intenso elaborado con granos de café arábica premium."
+},{
+    "name": "latte",
+    "water": 100,
+    "coffee": 50,
+    "milk": 100,
+    "chocolate": 0,
+    "cost": 2,
+    "description": "El clásico y delicioso café con leche."
+}
+
+]

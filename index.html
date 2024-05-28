@@ -22,7 +22,7 @@
     <!-- JS -->
     <script src="javascript.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> <!-- SweetAlerts -->
-    
+
   </head>
 
   <body>
@@ -31,32 +31,9 @@
         <h1>Coffee O-Matic 3000</h1>
       </div>
 
-      <div class="coffee-sel invisible">
-        <div class="container-coffee">
-          <div class="card coffee-card">
-            <img src="img/mocca.png" class="card-img-top coffe-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Mocca</h5>
-              <p class="card-text">La combinación perfecta entre la amargura e intensidad del café y la dulzura del cacao.</p>
-              <a id="mocca-btn" class="btn btn-primary buy-button coffee-btn ">Seleccionar</a>
-            </div>
-          </div>
-          <div class="card coffee-card">
-            <img src="img/latte.png" class="card-img-top coffe-img" alt="...">
-            <div class="card-body coffee-card">
-              <h5 class="card-title">Latte</h5>
-              <p class="card-text">El clásico y delicioso café con leche.</p>
-              <a id="latte-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
-            </div>
-          </div>
-          <div class="card coffee-card">
-            <img src="img/cappuccino.png" class="card-img-top coffe-img" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Cappuccino</h5>
-              <p class="card-text">Déjate seducir por su generosa y sedosa capa de leche entera combinada con un espresso intenso elaborado con granos de café arábica premium.</p>
-              <a id="cappucinno-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
-            </div>
-          </div>
+      <div class="coffee-sel">
+        <div class="container-coffee invisible">
+
         </div>
       </div>
 
@@ -65,15 +42,18 @@
           <p id="interactive-text">Bienvenido a la Coffee O-Matic 3000</p>
         </div>
         <div>
+          <!-- Formulario de Pago -->
           <form>
-          <input id="payment" min="1" max="20" class="invisible" type="text" placeholder="Introduzca el pago aqui"></input>
+            <label for="payment">Pago:</label>
+            <input id="payment" name="payment" min="1" max="20" class="invisible" type="text" placeholder="Introduzca el pago"></input>
+            <a id="pay-btn" class="btn btn-primary buy-button invisible">Pagar</a>
           </form>
         </div>
         <div>
           <a id="buy-btn" class="btn btn-success buy-button">Comprar</a>
           <a id="cancel-btn" class="btn btn-danger buy-button">Cancelar</a>
           <a id="continue-btn" class="btn btn-primary buy-button invisible">Continuar</a>
-          <a id="pay-btn" class="btn btn-primary buy-button invisible">Pagar</a>
+          
         </div>
       </div>
 
@@ -104,3 +84,27 @@
     
   </body>
 </html>
+          <!-- <div class="card coffee-card">
+            <img src="img/mocca.png" class="card-img-top coffe-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Mocca</h5>
+              <p class="card-text">La combinación perfecta entre la amargura e intensidad del café y la dulzura del cacao.</p>
+              <a id="mocca-btn" class="btn btn-primary buy-button coffee-btn ">Seleccionar</a>
+            </div>
+          </div>
+          <div class="card coffee-card">
+            <img src="img/latte.png" class="card-img-top coffe-img" alt="...">
+            <div class="card-body coffee-card">
+              <h5 class="card-title">Latte</h5>
+              <p class="card-text">El clásico y delicioso café con leche.</p>
+              <a id="latte-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
+            </div>
+          </div>
+          <div class="card coffee-card">
+            <img src="img/cappuccino.png" class="card-img-top coffe-img" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Cappuccino</h5>
+              <p class="card-text">Déjate seducir por su generosa y sedosa capa de leche entera combinada con un espresso intenso elaborado con granos de café arábica premium.</p>
+              <a id="cappucinno-btn" class="btn btn-primary coffee-btn ">Seleccionar</a>
+            </div>
+          </div> -->

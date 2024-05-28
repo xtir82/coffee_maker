@@ -1,5 +1,5 @@
 let interactiveScreen = document.getElementById('interactive-text');
-let containerCoffee = document.querySelector('.coffee-sel');
+let containerCoffee = document.querySelector('.container-coffee');
 
 //Botones
 let buyButton = document.getElementById('buy-btn');
@@ -7,11 +7,13 @@ let cancelButton = document.getElementById('cancel-btn');
 let continueButton = document.getElementById('continue-btn');
 let payButton = document.getElementById('pay-btn');
 let resetButton = document.getElementById('reset-btn');
+let coffeeBtn = document.querySelector('.coffee-btn');
 
+/*
 let moccaButton = document.getElementById('mocca-btn');
 let latteButton = document.getElementById('latte-btn');
 let cappuccinoButton = document.getElementById('cappucinno-btn');
-
+*/
 //Inputs
 let paymentInput = document.getElementById('payment');
 
@@ -30,17 +32,10 @@ let coffeeMachine = {
     },
 
     coffeTypes: {},
-    coffeTypesArray: [{
-        name: 'prueba',
-        water: 'prueba',
-        coffee: 'prueba',
-        milk: 'prueba',
-        chocolate:'prueba',
-        cost: 'prueba'
-    }],
+    coffeTypesArray: [],
 
     //Metodos
-    coffeeFactory (name, water, coffee, milk, chocolate, cost) {
+    /*coffeeFactory (name, water, coffee, milk, chocolate, cost) {
         return {
             name: name,
             water: water,
@@ -49,7 +44,7 @@ let coffeeMachine = {
             chocolate:chocolate,
             cost: cost
         }
-    },
+    },*/
     showMenu(){
         interactiveScreen.textContent = 'Seleccione el cafe que desea en el menu de la izquierda..';
         containerCoffee.classList.remove('invisible');
@@ -145,7 +140,7 @@ let coffeeMachine = {
         this.inventory.coffee -= userCoffee.coffee;
         console.log(this.inventory);
         updateLocalInv();
-        Swal.fire({
+        setTimeout( () => {Swal.fire({
             title: "Disfruta tu cafe!!",
             text: "Ya esta Listo!",
             icon: "success",
@@ -154,15 +149,16 @@ let coffeeMachine = {
             if (result.isConfirmed) {
                 coffeeMachine.reset();
             }
-          });
+          })}, 5000);
     }
 }
 
 //Creamos los Cafes
-coffeeMachine.coffeTypes.moka = coffeeMachine.coffeeFactory('Moka', 100, 50, 100, 0, 2);
+/*
+coffeeMachine.coffeTypes.mocca = coffeeMachine.coffeeFactory('Mocca', 100, 50, 100, 0, 2);
 coffeeMachine.coffeTypes.cappuccino = coffeeMachine.coffeeFactory('Cappuccino', 100, 50, 100, 100, 2);
 coffeeMachine.coffeTypes.latte = coffeeMachine.coffeeFactory('Latte', 100, 50, 100, 0, 2);
-
+*/
 
 
 //EventListeners de los botones (Se usan funciones anonimas para pasar los parametros a la funcion en el EventListener)
@@ -170,11 +166,11 @@ buyButton.addEventListener('click', coffeeMachine.showMenu);
 cancelButton.addEventListener('click', coffeeMachine.reset);
 payButton.addEventListener('click', () => {coffeeMachine.paymentCheck(paymentInput.value);});
 continueButton.addEventListener('click', () => {coffeeMachine.checkInventory(userCoffee);});
-
+/*
 moccaButton.addEventListener('click', () => {coffeeMachine.selectCoffee('mocca');});
 latteButton.addEventListener('click', () => {coffeeMachine.selectCoffee('latte');});
 cappuccinoButton.addEventListener('click', () => {coffeeMachine.selectCoffee('cappuccino');});
-
+*/
 //Implementacion del LocalStorage
 const checkLocalInv = () => {
     if (localStorage.getItem('coffeeInventory') === null) {
@@ -205,24 +201,24 @@ resetButton.addEventListener('click', () => {
 });
 
 //Testing Area
-/*
+
 const showCoffee = (coffee) => {
-    containerCoffee.innerHTML += '
+
+    console.log(coffee.name);
+    containerCoffee.innerHTML += `
     <div class="card coffee-card">
-        <img src="img/{coffee.name}.png" class="card-img-top coffe-img" alt="...">
+        <img src="img/${coffee.name}.png" class="card-img-top coffe-img" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{coffee.name}</h5>
-            <p class="card-text">{coffee.description}</p>
-            <a id="{coffee.name + '-btn'}" class="btn btn-primary buy-button coffee-btn ">Seleccionar</a>
+            <h5 class="card-title">${coffee.name}</h5>
+            <p class="card-text">${coffee.description}</p>
+            <a id="${coffee.name + '-btn'}" class="btn btn-primary buy-button coffee-btn">Seleccionar</a>
         </div>
-    </div>
-    ' 
+    </div>` 
 }
 
-coffeeMachine.coffeTypes.forEach(showCoffee);
 
 
-    coffeeFactory (name, water, coffee, milk, chocolate, cost, description) {
+/*coffeeMachine.coffeeFactory (name, water, coffee, milk, chocolate, cost, description, picture) {
         return {
             name: name,
             water: water,
@@ -230,9 +226,10 @@ coffeeMachine.coffeTypes.forEach(showCoffee);
             milk: milk,
             chocolate:chocolate,
             cost: cost,
-            description: description
+            description: description,
+            picture: picture
         }
-*/
+    }*/
 
 //De aqui pa abajo nada sirve aun :(
     
@@ -251,3 +248,38 @@ const printReport = () => {
 while (switchMaquina === true) {
     //buyCoffee();
 }
+
+const printCoff = (event) => {
+    console.log(event.target.id);
+}
+
+
+
+const getData = async() => {
+    try {
+        const response = await fetch('./assets/data.json');
+        if (response.ok) {
+            const coffeeData = await response.json();
+            coffeeData.forEach((coffee) => {
+                coffeeMachine.coffeTypesArray.push(coffee);
+                showCoffee(coffee);
+
+            })
+
+            coffeeBtn = document.getElementsByClassName('coffee-btn');
+console.log(coffeeBtn);
+
+            //funcion para guardar el menu en una variable global
+        } //throw new Error ('Error al cargar el menu');
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+getData()
+
+console.log(coffeeMachine.coffeTypesArray);
+
+
+coffeeBtn.addEventListener('click', printCoff); 
+
