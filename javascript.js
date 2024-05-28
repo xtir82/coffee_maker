@@ -15,6 +15,7 @@ let latteButton = document.getElementById('latte-btn');
 let cappuccinoButton = document.getElementById('cappucinno-btn');
 */
 //Inputs
+let payForm = document.getElementById('pay-form');
 let paymentInput = document.getElementById('payment');
 
 let userCoffee;
@@ -56,7 +57,8 @@ let coffeeMachine = {
         buyButton.classList.remove('invisible');
         payButton.classList.add('invisible');
         continueButton.classList.add('invisible');
-        paymentInput.classList.add('invisible');
+        payForm.classList.add('invisible');
+        //paymentInput.classList.add('invisible');
         paymentInput.value = '';
         userCoffee = '';
     },
@@ -73,12 +75,14 @@ let coffeeMachine = {
                 this.updateText(`Ya la entregaremos su cafe...`);
                 payButton.classList.add('invisible');
                 buyButton.classList.remove('invisible');
-                paymentInput.classList.add('invisible');
+                payForm.classList.add('invisible');
+                //paymentInput.classList.add('invisible');
             } else if (payment > 0) {
                 this.updateText(`Su cambio es de ${payment}. Ya la entregaremos su cafe...`);
                 payButton.classList.add('invisible');
                 buyButton.classList.remove('invisible');
-                paymentInput.classList.add('invisible');
+                payForm.classList.add('invisible');
+                //paymentInput.classList.add('invisible');
             }
             this.prepareCoffee();
         
@@ -114,7 +118,8 @@ let coffeeMachine = {
     checkInventory(){
         payButton.classList.remove('invisible');
         continueButton.classList.add('invisible');
-        paymentInput.classList.remove('invisible');
+        payForm.classList.remove('invisible');
+        //paymentInput.classList.remove('invisible');
 
         if (userCoffee.water > this.inventory.water) {
             this.updateText('No hay suficiente agua para preparar su cafe. Seleccione otro cafe');
@@ -276,9 +281,14 @@ const getData = async() => {
             coffeeBtn.forEach(btn => {btn.addEventListener("click", () =>{coffeeMachine.selectCoffee(btn.id)})});
             
             //funcion para guardar el menu en una variable global
-        } //throw new Error ('Error al cargar el menu');
+        } else {throw new Error ('Error al cargar el menu, por favor recargue la pagina o comuniquese con el administrador.');}
     } catch(error) {
         console.error(error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error
+          });;
     }
 }
 
