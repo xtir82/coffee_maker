@@ -7,7 +7,7 @@ let cancelButton = document.getElementById('cancel-btn');
 let continueButton = document.getElementById('continue-btn');
 let payButton = document.getElementById('pay-btn');
 let resetButton = document.getElementById('reset-btn');
-let coffeeBtn = document.querySelector('.coffee-btn');
+let coffeeBtn = document.querySelectorAll('.coffee-btn');
 
 /*
 let moccaButton = document.getElementById('mocca-btn');
@@ -88,7 +88,12 @@ let coffeeMachine = {
     },
     selectCoffee(selection){
         continueButton.classList.remove('invisible');
-        switch (selection) {
+        console.log(selection)
+        userCoffee = coffeeMachine.coffeTypesArray.filter((coffee) => {return coffee.name === selection})[0]
+        console.log(userCoffee);
+        this.updateText(`El cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`);
+
+        /*switch (selection) {
             case 'mocca':
                 userCoffee = this.coffeTypes.moka;
                 console.log(userCoffee);
@@ -104,7 +109,7 @@ let coffeeMachine = {
                 console.log(userCoffee);
                 this.updateText(`El cafe que usted ha seleccionado es ${userCoffee.name} y su precio es ${userCoffee.cost}$ presione continuar para avanzar o si desea puede seleccionar otro cafe.`);
                 break;
-        }
+        }*/
     },
     checkInventory(){
         payButton.classList.remove('invisible');
@@ -203,18 +208,20 @@ resetButton.addEventListener('click', () => {
 //Testing Area
 
 const showCoffee = (coffee) => {
-
-    console.log(coffee.name);
     containerCoffee.innerHTML += `
     <div class="card coffee-card">
         <img src="img/${coffee.name}.png" class="card-img-top coffe-img" alt="...">
         <div class="card-body">
             <h5 class="card-title">${coffee.name}</h5>
             <p class="card-text">${coffee.description}</p>
-            <a id="${coffee.name + '-btn'}" class="btn btn-primary buy-button coffee-btn">Seleccionar</a>
+            <a id="${coffee.name}" class="btn btn-primary buy-button coffee-btn">Seleccionar</a>
         </div>
-    </div>` 
-}
+    </div>`;
+    
+    
+    //document.getElementById(coffee.name+'-btn').addEventListener('click', () =>{ console.log('holis')});
+
+}   
 
 
 
@@ -248,10 +255,10 @@ const printReport = () => {
 while (switchMaquina === true) {
     //buyCoffee();
 }
-
+/*
 const printCoff = (event) => {
     console.log(event.target.id);
-}
+}*/
 
 
 
@@ -263,12 +270,11 @@ const getData = async() => {
             coffeeData.forEach((coffee) => {
                 coffeeMachine.coffeTypesArray.push(coffee);
                 showCoffee(coffee);
-
+                console.log(coffee.name);
             })
-
-            coffeeBtn = document.getElementsByClassName('coffee-btn');
-console.log(coffeeBtn);
-
+            coffeeBtn = document.querySelectorAll('.coffee-btn');
+            coffeeBtn.forEach(btn => {btn.addEventListener("click", () =>{coffeeMachine.selectCoffee(btn.id)})});
+            
             //funcion para guardar el menu en una variable global
         } //throw new Error ('Error al cargar el menu');
     } catch(error) {
@@ -280,6 +286,8 @@ getData()
 
 console.log(coffeeMachine.coffeTypesArray);
 
-
-coffeeBtn.addEventListener('click', printCoff); 
-
+/*
+coffeeBtn = document.getElementsByClassName('coffee-btn');
+console.log(coffeeBtn);
+coffeeBtn.addEventListener('click', printCoff);
+*/
