@@ -178,7 +178,7 @@ resetButton.addEventListener('click', () => {
 const showCoffee = (coffee) => {
     containerCoffee.innerHTML += `
     <div class="card coffee-card">
-        <img src="img/${coffee.name}.png" class="card-img-top coffee-img" alt="...">
+        <img class="img-coffee" src="img/${coffee.name}.png" class="card-img-top coffee-img" alt="...">
         <div class="card-body">
             <h2 class="card-title">${coffee.name}</h2>
             <p class="card-text">${coffee.description}</p>
